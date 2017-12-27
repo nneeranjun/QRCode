@@ -26,31 +26,21 @@ public class User {
     private String instagram;
     private String twitter;
     private String location;
-    private String facebook;
     private Bitmap qrcode;
-    private Bitmap picture;
-    private String identifier;
 
 
-
-
-
-
-    public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String location, Bitmap picture){
+    public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String location) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.snapchat = snapchat;
         this.instagram = instagram;
+        this.location = location;
         this.twitter = twitter;
-
-        this.location=location;
-        this.identifier = UUID.randomUUID().toString();
-        generateQrCode();
 
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
@@ -72,13 +62,8 @@ public class User {
     }
 
 
-
     public String getTwitter() {
         return twitter;
-    }
-
-    public String getLocation() {
-        return location;
     }
 
 
@@ -107,28 +92,21 @@ public class User {
     }
 
 
-
     public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setPicture(Bitmap picture) {
-        this.picture = picture;
-    }
 
-
-
-    public Bitmap generateQrCode(){
+    private Bitmap generateQrCode() {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         Gson gson = new Gson();
         String objectString = gson.toJson(this);
-
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(objectString, BarcodeFormat.QR_CODE,700,700);
+            BitMatrix bitMatrix = multiFormatWriter.encode(objectString, BarcodeFormat.QR_CODE, 700, 700);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrcode = bitmap;
-        }catch (WriterException e){
+        } catch (WriterException e) {
             e.printStackTrace();
         }
         return qrcode;
@@ -136,14 +114,12 @@ public class User {
 
 
     public Bitmap getQrcode() {
-        return qrcode;
+        return generateQrCode();
     }
 
-    public String getIdentifier(){
-        return identifier;
-    }
-
-    public Bitmap getPicture() {
-        return picture;
+    public String getLocation() {
+        return location;
     }
 }
+
+

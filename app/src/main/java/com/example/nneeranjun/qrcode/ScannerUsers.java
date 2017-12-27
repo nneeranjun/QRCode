@@ -29,16 +29,16 @@ public class ScannerUsers extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         users = (ListView) findViewById(R.id.scannedUsers);
         //Test
-        Bitmap test_image = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.profile_test);
-        User user = new User("Nilay","Neeranjun","9548920275","nneeranjun","nneeranjun","nneeranjun","Davie",test_image);
+        //Bitmap test_image = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.profile_test);
+        User user = new User("Nilay","Neeranjun","9548920275","nneeranjun","nneeranjun","nneeranjun","Davie");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
         Gson gson = new Gson();
 
-        editor.putString(user.getIdentifier(),gson.toJson(user));
-        editor.commit();
+       //editor.putString(user.getIdentifier(),gson.toJson(user));
+        //editor.commit();
 
         //Test
 

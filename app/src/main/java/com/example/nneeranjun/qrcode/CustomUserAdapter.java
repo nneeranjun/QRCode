@@ -50,7 +50,7 @@ public class CustomUserAdapter extends BaseAdapter {
         ImageView imageView = (ImageView) customView.findViewById(R.id.profile);
         TextView name = (TextView) customView.findViewById(R.id.name);
         User user= (User) getItem(i);
-        imageView.setImageBitmap(user.getPicture());
+        //imageView.setImageBitmap(user.getPicture());
         name.setText(user.getFirstName()+" "+user.getLastName());
 
         return customView;

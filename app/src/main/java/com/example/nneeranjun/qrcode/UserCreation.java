@@ -68,7 +68,7 @@ public class UserCreation extends AppCompatActivity {
                 else{
                     String[] name = nameText.getText().toString().split(" ");
                     Bitmap bm=((BitmapDrawable)profileImage.getDrawable()).getBitmap();
-                    User user = new User(name[0],name[1],phoneText.getText().toString(),snapchatText.getText().toString(),instagramText.getText().toString(),twitterText.getText().toString(),getCurrentLocation(),bm);
+                    User user = new User(name[0],name[1],phoneText.getText().toString(),snapchatText.getText().toString(),instagramText.getText().toString(),twitterText.getText().toString(),getCurrentLocation());
                     Gson gson = new Gson();
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = sp.edit();

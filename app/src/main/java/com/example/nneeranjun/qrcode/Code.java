@@ -23,12 +23,11 @@ public class Code extends AppCompatActivity {
       // Bitmap test_image = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.profile_test);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Gson gson = new Gson();
-        //User user = gson.fromJson(sharedPreferences.getString("user",""),User.class);
-        Toast.makeText(getApplicationContext(),"nigger",Toast.LENGTH_LONG).show();
-        User user = new User("nilay","neeranjun","neeranjun", "neeranjun", "neeranjun", "neeranjun", "neeranjun", null);
-        //Bitmap qrcode = user.generateQrCode();
-        //qr_view = (ImageView) findViewById(R.id.qr);
-       // qr_view.setImageBitmap(qrcode);
+        User user = gson.fromJson(sharedPreferences.getString("user",""),User.class);
+        //User user = new User("nilay","neeranjun","9548920275","neeranjun", "neeranjun", "nneeranjun","Davie");
+        Bitmap qrcode = user.getQrcode();
+        qr_view = (ImageView) findViewById(R.id.qr);
+       qr_view.setImageBitmap(qrcode);
 
 
     }
