@@ -37,8 +37,7 @@ public class ScannerUsers extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-       //editor.putString(user.getIdentifier(),gson.toJson(user));
-        //editor.commit();
+
 
         //Test
 
