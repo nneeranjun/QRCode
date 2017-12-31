@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QR Code</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">CWytkGrFBCZRAh1mLHatgS5D5</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">zG0r5LLxQ9k7uzYxJ1rRx6MbYZeHvQ5uyT3M46wFnzWG0IBub2</string>
 </resources>

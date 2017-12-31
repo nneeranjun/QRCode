@@ -39,16 +39,9 @@ public class Login extends AppCompatActivity {
         spinner = (ProgressBar) findViewById(R.id.spinner);
         spinner.setVisibility(View.GONE);
         alertDialog = new AlertDialog.Builder(getApplicationContext());
-
-
-
-
-
-
-
     }
 
-    public void login(Context context){
+    public void login(View view){
         spinner.setVisibility(View.VISIBLE);
 
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
