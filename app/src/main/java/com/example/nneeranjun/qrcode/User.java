@@ -25,16 +25,18 @@ public class User {
     private String snapchat;
     private String instagram;
     private String twitter;
+    private String facebook;
     private String location;
     private Bitmap qrcode;
 
 
-    public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String location) {
+    public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String facebook, String location) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.snapchat = snapchat;
         this.instagram = instagram;
+        this.facebook = facebook;
         this.location = location;
         this.twitter = twitter;
 
@@ -61,9 +63,18 @@ public class User {
         return instagram;
     }
 
+    public String getFacebook() {
+        return facebook;
+    }
+    public Bitmap getQrcode() {
+        return generateQrCode();
+    }
 
     public String getTwitter() {
         return twitter;
+    }
+    public String getLocation() {
+        return location;
     }
 
 
@@ -81,6 +92,10 @@ public class User {
 
     public void setInstagram(String instagram) {
         this.instagram = instagram;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -113,13 +128,8 @@ public class User {
     }
 
 
-    public Bitmap getQrcode() {
-        return generateQrCode();
-    }
 
-    public String getLocation() {
-        return location;
-    }
+
 }
 
 

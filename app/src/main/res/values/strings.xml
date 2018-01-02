@@ -2,4 +2,7 @@
     <string name="app_name">QR Code</string>
     <string name="com.twitter.sdk.android.CONSUMER_KEY">CWytkGrFBCZRAh1mLHatgS5D5</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">zG0r5LLxQ9k7uzYxJ1rRx6MbYZeHvQ5uyT3M46wFnzWG0IBub2</string>
+    <string name="facebook_app_id">319261538577781</string>
+    <string name="fb_login_protocol_scheme">fb319261538577781</string>
+
 </resources>
