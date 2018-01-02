@@ -30,7 +30,7 @@ public class ScannerUsers extends AppCompatActivity {
         users = (ListView) findViewById(R.id.scannedUsers);
         //Test
         //Bitmap test_image = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.profile_test);
-        User user = new User("Nilay","Neeranjun","9548920275","nneeranjun","nneeranjun","nneeranjun","nneeranjun","Davie");
+        User user = new User("Nilay","Neeranjun","9548920275","nneeranjun","nneeranjun","nneeranjun","nneeranjun","Davie","nneeranjun");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 

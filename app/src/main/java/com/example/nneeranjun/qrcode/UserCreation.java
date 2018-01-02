@@ -25,6 +25,8 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
@@ -47,10 +49,15 @@ public class UserCreation extends AppCompatActivity {
     String snapchatUsername;
     String instagramUsername;
     TwitterLoginButton twitterBtn;
-    ImageView profileImage;
+    ImageView profilePicture;
     CallbackManager callbackManager;
     FirebaseFirestore db;
     LoginButton facebookBtn;
+    String emailAddress;
+    FirebaseUser currentUser;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +70,18 @@ public class UserCreation extends AppCompatActivity {
         setContentView(R.layout.activity_user_creation);
         nameText = findViewById(R.id.name);
         phoneText = findViewById(R.id.phoneNumber);
-        profileImage = findViewById(R.id.profile_image);
+        profilePicture = findViewById(R.id.profile_image);
         facebookBtn = findViewById(R.id.facebook_btn);
         twitterUsername = "";
         facebookID = "";
         snapchatUsername = "";
         instagramUsername = "";
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser!=null){
+            emailAddress = currentUser.getEmail();
+        }
+
         db = FirebaseFirestore.getInstance();
 
 
@@ -142,8 +155,8 @@ public class UserCreation extends AppCompatActivity {
 
     public void saveInfo(View view){
         String[] name = nameText.getText().toString().split(" ");
-        Bitmap bm = ((BitmapDrawable) profileImage.getDrawable()).getBitmap();
-        User user = new User(name[0], name[1], phoneText.getText().toString(), snapchatUsername, instagramUsername, twitterUsername, facebookID, getCurrentLocation());
+        Bitmap bm = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+        User user = new User(name[0], name[1], phoneText.getText().toString(), snapchatUsername, instagramUsername, twitterUsername, facebookID, getCurrentLocation(),emailAddress);
         Gson gson = new Gson();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sp.edit();
@@ -152,26 +165,25 @@ public class UserCreation extends AppCompatActivity {
 
         /** FIRESTORE */
 
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("users").document(emailAddress)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_SHORT).show();
+                    public void onSuccess(Void aVoid) {
                         startActivity(new Intent(getApplicationContext(), Code.class));
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
+                        Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
                     }
                 });
 
 
-
     }
+
+
 }
 
 

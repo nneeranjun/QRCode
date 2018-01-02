@@ -27,10 +27,11 @@ public class User {
     private String twitter;
     private String facebook;
     private String location;
+    private String emailAddress;
     private Bitmap qrcode;
 
 
-    public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String facebook, String location) {
+    public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String facebook, String location, String emailAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -39,7 +40,12 @@ public class User {
         this.facebook = facebook;
         this.location = location;
         this.twitter = twitter;
+        this.emailAddress= emailAddress;
 
+    }
+
+    public User(){
+        //Do nothing (For Firebase)
     }
 
     public String getFirstName() {
@@ -77,6 +83,9 @@ public class User {
         return location;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -110,6 +119,15 @@ public class User {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setQrcode(Bitmap qrcode) {
+        this.qrcode = qrcode;
+    }
+
 
 
     private Bitmap generateQrCode() {
