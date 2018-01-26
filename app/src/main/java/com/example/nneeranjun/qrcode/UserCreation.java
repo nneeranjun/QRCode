@@ -1,18 +1,13 @@
 package com.example.nneeranjun.qrcode;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.location.Location;
-import android.media.Image;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,10 +22,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.Gson;
-import com.google.zxing.qrcode.encoder.QRCode;
+import com.instagram.instagramapi.engine.InstagramEngine;
+import com.instagram.instagramapi.exceptions.InstagramException;
+import com.instagram.instagramapi.interfaces.InstagramAPIResponseCallback;
+import com.instagram.instagramapi.interfaces.InstagramLoginCallbackListener;
+import com.instagram.instagramapi.objects.IGPagInfo;
+import com.instagram.instagramapi.objects.IGSession;
+import com.instagram.instagramapi.objects.IGUser;
+import com.instagram.instagramapi.utils.InstagramKitLoginScope;
+import com.instagram.instagramapi.widgets.InstagramLoginButton;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -52,6 +53,7 @@ public class UserCreation extends AppCompatActivity {
     ImageView profilePicture;
     CallbackManager callbackManager;
     FirebaseFirestore db;
+    EditText snapchat;
     LoginButton facebookBtn;
     String emailAddress;
     FirebaseUser currentUser;
@@ -67,11 +69,15 @@ public class UserCreation extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+
+
+
         setContentView(R.layout.activity_user_creation);
         nameText = findViewById(R.id.name);
         phoneText = findViewById(R.id.phoneNumber);
         profilePicture = findViewById(R.id.profile_image);
         facebookBtn = findViewById(R.id.facebook_btn);
+        snapchat = findViewById(R.id.snapchat);
         twitterUsername = "";
         facebookID = "";
         snapchatUsername = "";
@@ -136,7 +142,55 @@ public class UserCreation extends AppCompatActivity {
 
         /** INSTAGRAM BUTTON STUFF */
 
+       /* InstagramLoginCallbackListener instagramLoginCallbackListener = new InstagramLoginCallbackListener() {
+            @Override
+            public void onSuccess(IGSession session) {
+
+
+            }
+
+            @Override
+            public void onCancel() {
+
+
+            }
+
+            @Override
+            public void onError(InstagramException error) {
+
+
+            }
+        };
+
+        String[] scopes = {InstagramKitLoginScope.BASIC, InstagramKitLoginScope.RELATIONSHIP};
+        InstagramLoginButton instagramLoginButton = findViewById(R.id.instagram_btn);
+        instagramLoginButton.setInstagramLoginCallback(instagramLoginCallbackListener);
+        //if you dont specify scopes, you will have basic access.
+        instagramLoginButton.setScopes(scopes);
+
+        InstagramAPIResponseCallback<IGUser> instagramUserResponseCallback = new InstagramAPIResponseCallback<IGUser>() {
+            @Override
+            public void onResponse(IGUser responseObject, IGPagInfo pageInfo) {
+
+                instagramUsername=responseObject.getUsername();
+            }
+
+            @Override
+            public void onFailure(InstagramException exception) {
+
+            }
+        };
+
+        InstagramEngine.getInstance(this).getUserDetails(instagramUserResponseCallback);
+        */
+
+
+
+
+
         /** END INSTAGRAM BUTTON STUFF */
+
+
 
     }
 
@@ -155,13 +209,11 @@ public class UserCreation extends AppCompatActivity {
 
     public void saveInfo(View view){
         String[] name = nameText.getText().toString().split(" ");
+        snapchatUsername = snapchat.getText().toString();
         Bitmap bm = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
         User user = new User(name[0], name[1], phoneText.getText().toString(), snapchatUsername, instagramUsername, twitterUsername, facebookID, getCurrentLocation(),emailAddress);
-        Gson gson = new Gson();
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("user", gson.toJson(user));
-        editor.apply();
+
+
 
         /** FIRESTORE */
 

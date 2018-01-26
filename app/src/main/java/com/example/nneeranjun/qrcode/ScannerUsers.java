@@ -31,8 +31,7 @@ public class ScannerUsers extends AppCompatActivity {
         //Test
         //Bitmap test_image = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.profile_test);
         User user = new User("Nilay","Neeranjun","9548920275","nneeranjun","nneeranjun","nneeranjun","nneeranjun","Davie","nneeranjun");
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
 
         Gson gson = new Gson();

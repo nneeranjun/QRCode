@@ -33,9 +33,9 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         firebaseAuth = FirebaseAuth.getInstance();
-        password = (EditText) findViewById(R.id.password);
-        email = (EditText)findViewById(R.id.email);
-        spinner = (ProgressBar) findViewById(R.id.spinner);
+        password = findViewById(R.id.password);
+        email = findViewById(R.id.email);
+        spinner = findViewById(R.id.spinner);
         spinner.setVisibility(View.GONE);
         alertDialog = new AlertDialog.Builder(getApplicationContext());
 

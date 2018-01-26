@@ -52,14 +52,13 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             spinner.setVisibility(View.GONE);
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(),Code.class);
                             startActivity(intent);
-                            //updateUI(user);
+
                         } else {
                             spinner.setVisibility(View.GONE);
                             alertDialog.setTitle("Error").setMessage("Invalid information").create();
 
-                            //updateUI(null);
                         }
 
                         // ...

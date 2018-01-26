@@ -8,6 +8,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.encoder.QRCode;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.Random;
 import java.util.UUID;
@@ -28,7 +29,11 @@ public class User {
     private String facebook;
     private String location;
     private String emailAddress;
-    private Bitmap qrcode;
+
+
+    public User(){
+        //Do nothing (For Firebase)
+    }
 
 
     public User(String firstName, String lastName, String phoneNumber, String snapchat, String instagram, String twitter, String facebook, String location, String emailAddress) {
@@ -44,9 +49,7 @@ public class User {
 
     }
 
-    public User(){
-        //Do nothing (For Firebase)
-    }
+
 
     public String getFirstName() {
         return firstName;
@@ -72,9 +75,7 @@ public class User {
     public String getFacebook() {
         return facebook;
     }
-    public Bitmap getQrcode() {
-        return generateQrCode();
-    }
+
 
     public String getTwitter() {
         return twitter;
@@ -124,26 +125,25 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public void setQrcode(Bitmap qrcode) {
-        this.qrcode = qrcode;
-    }
 
 
-
-    private Bitmap generateQrCode() {
+   /* private Bitmap generateQrCode() {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         Gson gson = new Gson();
+        Bitmap qrcode=null;
         String objectString = gson.toJson(this);
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(objectString, BarcodeFormat.QR_CODE, 700, 700);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+
             qrcode = bitmap;
         } catch (WriterException e) {
             e.printStackTrace();
         }
         return qrcode;
     }
+    */
 
 
 

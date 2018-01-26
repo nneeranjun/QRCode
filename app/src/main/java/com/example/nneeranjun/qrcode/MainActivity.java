@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 User scanned_user = gson.fromJson(result.getContents(),User.class);
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-               // SharedPreferences.Editor editor = sharedPreferences.edit();
-                //editor.putString(scanned_user.getIdentifier(),result.getContents());
 
             }
 

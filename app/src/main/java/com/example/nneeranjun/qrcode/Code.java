@@ -21,9 +21,17 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+
 
 public class Code extends AppCompatActivity {
     ImageView qr_view;
+
 
     User user;
     FirebaseFirestore db;
@@ -37,9 +45,8 @@ public class Code extends AppCompatActivity {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Toast.makeText(getApplicationContext(),documentSnapshot.getId(),Toast.LENGTH_LONG).show();
                 User user = documentSnapshot.toObject(User.class);
-                Bitmap qrcode = user.getQrcode();
+                Bitmap qrcode = generateQrCode(user);
                 qr_view = findViewById(R.id.qr);
                 qr_view.setImageBitmap(qrcode);
 
@@ -49,6 +56,23 @@ public class Code extends AppCompatActivity {
 
 
 
+    }
+
+    public Bitmap generateQrCode(User user){
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        Gson gson = new Gson();
+        Bitmap qrcode=null;
+        String objectString = gson.toJson(user);
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(objectString, BarcodeFormat.QR_CODE, 700, 700);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+
+            qrcode = bitmap;
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        return qrcode;
     }
 
 
